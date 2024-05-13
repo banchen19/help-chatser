@@ -1,9 +1,9 @@
-use std::io::{Read, Write};
+use std::io::{Write};
 
 use actix_files::{Files, NamedFile};
 use actix_web::{
     middleware::Logger,
-    web::{self, route},
+    web::{self},
     App, HttpResponse, HttpServer, Responder,
 };
 
