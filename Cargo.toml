@@ -1,0 +1,44 @@
+[package]
+name = "chat_server_mail"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+
+# actix系列
+actix = "0.13.0"
+actix-files = "0.6.2"
+actix-web = "4"
+actix-web-actors = "4.1.0"
+actix-cors = "0.7.0"
+
+
+# 多线程异步
+tokio = { version = "1", features = ["full"] }
+futures-util = { version = "0.3", default-features = false }
+
+
+# 数据库
+sqlx={version="0.5.10",features=["postgres","runtime-tokio-rustls","macros","chrono","sqlite","mysql"]}
+
+# log系列
+log = "0.4" 
+env_logger = "0.11" 
+
+
+# 日期和时间
+chrono = "0.4.35" 
+
+
+# 邮箱库
+lettre = "0.11.3"
+lettre_email = "0.9.4"
+
+
+# serde系列 序列化和反序列化
+serde = { version = "1.0", features = ["derive"] }
+serde_yaml = "0.9.27"
+serde_json = "1.0.88"
+
+# html
+rtml = "0.17.0"

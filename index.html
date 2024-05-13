@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+        <html>
+        
+        <head>
+          <!-- 当打开页面的时候使用get请求获取所有消息 -->
+          <script>
+            // 获取元素
+            var displayBox = document.getElementById('displayBox');
+            // 发送get请求
+            var xhr = new XMLHttpRequest();
+            xhr.open('get', '/messages');
+            xhr.onreadystatechange = function () {
+              if (xhr.readyState === 4 && xhr.status === 200) {
+                // 将响应的消息转换为json对象
+                var messages = JSON.parse(xhr.responseText);
+                // 遍历消息数组
+                messages.forEach(function (message) {
+                  // 创建一个新的段落元素
+                  var p = document.createElement('p');
+                  // 设置段落元素的文本内容
+                  p.innerText = message.message + "\n" + message.create_time;
+                  // 将段落元素添加到消息显示框中
+                  displayBox.appendChild(p);
+                });
+              }
+            };
+            xhr.send();
+          </script>
+        
+        </head>
+        
+        <body>
+          <div class="container">
+            <!-- 第一行：一个消息 -->
+            <p id="message">请在下方输入要说的话，并点击发送</p>
+            <!-- 第二行：一个输入框 -->
+            <form action="/" method="post">
+        
+              <input type="text" id="inputBox" />
+              <!-- 第三行：一个按钮 -->
+              <button id="submitButton">发送</button>
+              <!-- 第四行：一个消息显示框 -->
+            </form>
+            <div id="displayBox"></div>
+            <script>
+              // 获取元素
+              var message = document.getElementById('message');
+              var inputBox = document.getElementById('inputBox');
+              var submitButton = document.getElementById('submitButton');
+              var displayBox = document.getElementById('displayBox');
+              submitButton.onclick = function () {
+                var content = inputBox.value;
+                var data = "message=" + content;
+        
+                var xhr = new XMLHttpRequest();
+                xhr.withCredentials = true;
+        
+                xhr.addEventListener("readystatechange", function () {
+                  if (this.readyState === 4) {
+                    console.log(this.responseText);
+                  }
+                });
+        
+                xhr.open("POST", "/send");
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xhr.send(data);
+
+                displayBox.innerHTML = "";
+                var p = document.createElement('p');
+                // 设置段落元素的文本内容
+                var xhr = new XMLHttpRequest();
+            xhr.open('get', '/messages');
+            xhr.onreadystatechange = function () {
+              if (xhr.readyState === 4 && xhr.status === 200) {
+                // 将响应的消息转换为json对象
+                var messages = JSON.parse(xhr.responseText);
+                // 遍历消息数组
+                messages.forEach(function (message) {
+                  // 创建一个新的段落元素
+                  var p = document.createElement('p');
+                  // 设置段落元素的文本内容
+                  p.innerText = message.message + "\n" + message.create_time;
+                  // 将段落元素添加到消息显示框中
+                  displayBox.appendChild(p);
+                });
+              }
+            };
+            xhr.send();
+              };
+            </script>
+        
+          </div>
+        </html>
+        
