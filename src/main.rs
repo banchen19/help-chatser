@@ -162,8 +162,8 @@ async fn main() -> Result<(), std::io::Error> {
             .service(Files::new("/", "./"))
             .wrap(Logger::default())
     })
-    .bind(("127.0.0.1", 2000))?
-    .bind(("[::1]", 2000))?
+    .bind(("0.0.0.0", 2000))?
+    .bind(("[::0]", 2000))?
     .run()
     .await
 }
@@ -244,6 +244,7 @@ pub async fn send_code(message_data: String) -> HttpResponse {
     let to_mail = Message::builder()
         .from(mailbox) //发送者
         .to("738270846@qq.com".to_owned().parse().unwrap()) //接收者
+        .to("banchen8964@gmail.com".to_owned().parse().unwrap())
         .subject("紧急消息")
         .header(ContentType::TEXT_HTML)
         .body(message_data) //邮箱内容
