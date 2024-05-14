@@ -144,7 +144,7 @@ async fn main() -> Result<(), std::io::Error> {
         CREATE TABLE IF NOT EXISTS chat_message (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             message TEXT NOT NULL,
-            create_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+            create_timetimestamp not null default(datetime(CURRENT_TIMESTAMP,'localtime'))
         )
         "#,
     )
